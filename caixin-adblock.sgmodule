@@ -57,6 +57,7 @@ DOMAIN-SUFFIX,ulogs.umengcloud.com,REJECT,dns-failed
 hostname = %APPEND% *.caixin.com, *.caixin.cn, *.caixinmedia.com, *.adsame.com, *.fastecn.com
 
 [Script]
-# 正文 H5 广告隐藏：向文章 HTML 注入 CSS（class 已从 index.js 源码确认）
-# script-path 为本地文件名，需把 caixin-body-ad.js 放到 Surge 的脚本目录
-caixin_body_ad_hide = type=http-response, pattern=^https?:\/\/mappsv5\.caixin\.com\/articlev5\/.+\.html, requires-body=1, max-size=0, binary-body-mode=0, script-path=caixin-body-ad.js
+# 正文 H5 广告隐藏 + AI 卡片移除：向文章 HTML 注入 CSS、破坏 AI 卡片锚点
+# 远程加载：脚本与本模块同仓库，无需手动放置文件
+# 修改脚本后，把下方 URL 末尾的版本号 ?v=1 改大即可让 Surge 重新拉取
+caixin_body_ad_fix = type=http-response, pattern=^https?:\/\/mappsv5\.caixin\.com\/articlev5\/.+\.html, requires-body=1, max-size=0, binary-body-mode=0, script-path=https://raw.githubusercontent.com/YUANCHUANYING/surge/main/caixin-body-ad.js?v=1

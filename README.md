@@ -35,14 +35,21 @@
 
 **依赖文件**
 
-`caixin-body-ad.js` —— 用于正文 H5 页面注入样式、移除 AI 卡片锚点。需放置于 Surge 脚本目录。
+`caixin-body-ad.js` —— 用于正文 H5 页面注入样式、移除 AI 卡片锚点。
+
+该脚本已通过模块内的远程地址自动加载，**无需手动放置**。
 
 **安装**
 
-1. 将 `caixin-body-ad.js` 放入 Surge 脚本目录
-2. 在 Surge 中安装并启用 `caixin-adblock.sgmodule`
-3. 确认 MITM 已开启且证书已信任
-4. **首次使用建议卸载重装财新 App 清除广告缓存**
+1. 在 Surge 中安装并启用 `caixin-adblock.sgmodule`
+2. 确认 MITM 已开启且证书已信任
+3. **首次使用建议卸载重装财新 App 清除广告缓存**
+
+安装地址：
+
+```
+https://raw.githubusercontent.com/YUANCHUANYING/surge/main/caixin-adblock.sgmodule
+```
 
 **已知限制**
 
