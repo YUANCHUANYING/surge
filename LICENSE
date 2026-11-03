@@ -22,8 +22,7 @@ Surge 模块文件（.sgmodule）、JavaScript 脚本（.js）、
 【禁止转载】
 
 未经版权持有人事先明确书面许可，任何组织或个人不得：
-
-  1. 转载、摘编、复制、镜像、转载本项目的全部或部分内容；
+  1. 转载、摘编、复制、镜像本项目的全部或部分内容；
   2. 将本项目内容发布至任何代码托管平台、论坛、博客、
      社交媒体、网盘或其他公开渠道；
   3. 将本项目内容整合、改编后以任何名义对外提供；
@@ -31,27 +30,80 @@ Surge 模块文件（.sgmodule）、JavaScript 脚本（.js）、
 
 【免责声明】
 
-本项目按"现状"（AS IS）提供，不附带任何明示或暗示的担保，
-包括但不限于对适销性、特定用途适用性及非侵权性的担保。
+一、按"现状"提供
+
+本项目按"现状"（AS IS）及"现有"（AS AVAILABLE）提供，
+不附带任何明示或暗示的担保，包括但不限于对适销性、
+特定用途适用性、准确性、完整性、无病毒性及非侵权性的
+担保。版权持有人不保证本项目内容准确、完整、及时、
+可靠或无错误，亦不保证其持续可用或不被中断。
+
+二、使用风险自负
+
+使用者应充分了解使用本项目所涉及的全部技术风险，
+并在使用前自行评估、自行判断、自行承担相应后果。
+使用者一旦使用本项目，即视为其已充分理解并自愿承担
+由此产生的一切风险与责任。
+
+三、责任限制
 
 在任何情况下，版权持有人均不对因使用或无法使用本项目
-而产生的任何直接、间接、偶然、特殊或后果性损害承担责任，
-包括但不限于数据丢失、设备损坏、服务中断或利润损失。
+而产生的任何直接、间接、附带、偶然、特殊、惩罚性或
+后果性损害承担责任，包括但不限于：
+  · 数据丢失、损坏或泄露；
+  · 设备损坏、系统故障或无法开机；
+  · 应用程序异常、崩溃、被封禁或功能失效；
+  · 网络中断、服务停止、账号受限；
+  · 业务中断、利润损失、商誉损失；
+  · 第三方索赔或行政处罚。
+上述限制不因版权持有人事先被告知该等损害可能发生而改变。
 
-使用者在使用本项目前应充分了解相关技术风险，
-并自行承担全部使用风险。
+四、有效性保障
 
-【许可终止】
+使用者应自行确认其使用行为符合所在国家或地区法律法规、
+运营商服务条款及所涉应用程序的用户协议。使用者因违反
+上述规定而导致的任何后果，均由使用者自行承担，与版权
+持有人无关。版权持有人不对使用者的合法资格、授权状况
+或使用行为的合规性作任何保证。
+
+五、第三方内容
+
+本项目可能涉及对第三方应用程序或服务的分析、调试与
+规则配置，相关应用程序及服务的名称、商标、著作权等
+归各自权利人所有。本项目与任何前述第三方均无隶属、
+合作或授权关系，亦不代表其立场或观点。
+
+六、权利侵害处理
+
+如本项目中任何内容无意中侵犯了任何第三方的合法权益，
+请通过仓库 Issue 联系，版权持有人将在核实后及时删除或
+修改相关内容。在此之前，请勿自行转载或传播该部分内容。
+
+七、条款变更
+
+版权持有人保留在不另行通知的情况下随时修改、暂停或
+终止本项目及其任何部分的权利，亦保留随时更新本声明的
+权利。使用者应自行关注最新版本；继续使用即视为接受
+修订后的条款。
+
+八、许可终止
 
 一旦违反上述任一条款，本许可自动终止，
 使用者应立即停止使用并删除本项目的全部副本。
 
 ────────────────────────────────────────────
 
-如需获得授权或有任何疑问，请通过仓库 Issue 联系作者。
-
 All rights reserved. No part of this repository may be
 reproduced, distributed, or transmitted in any form or by
 any means without the prior written permission of the
 copyright holder, except for the purpose of personal,
 non-commercial study and research.
+
+THIS PROJECT IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY
+KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHOR
+BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE PROJECT OR THE USE OR
+OTHER DEALINGS IN THE PROJECT.
