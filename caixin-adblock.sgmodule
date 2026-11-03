@@ -1,0 +1,62 @@
+#!name=财新 App 去广告（开屏 / 信息流 / 正文）
+#!desc=去除财新 App 开屏广告、信息流原生广告、底部横幅与正文内嵌广告。基于 Surge 实抓验证。
+#!author=Minis
+#!category=去广告
+#!date=2026-11-03
+#!icon=https://www.caixin.com/favicon.ico
+#!homepage=https://www.caixin.com
+
+[Rule]
+# ══════════════════════════════════════════════════════
+# 实测摘要（Surge 抓包验证）
+#  · 全部广告位请求走：gg.caixin.com/s?z=caixin&op=1&c=<广告位ID>&w=&h=
+#  · 正文是 H5：mappsv5.caixin.com/articlev5/...，广告由 index.js 运行时插入
+#    节点 class：wall-ads(文中大图) / pip-ads(画中画) / long-ads(列表)
+#  · dolphin.caixin.com 是埋点非广告，不要拦
+#  · gg 被拦后 App 回退本地缓存 ⇒ 需卸载重装清缓存才能看到彻底效果
+# ══════════════════════════════════════════════════════
+
+# ① 广告位接口（开屏 + 信息流 + 正文 核心）
+DOMAIN-SUFFIX,gg.caixin.com,REJECT,dns-failed
+
+# ② 自有广告素材与商务推广
+DOMAIN-SUFFIX,adfile.caixin.com,REJECT,dns-failed
+DOMAIN-SUFFIX,promote.caixin.com,REJECT,dns-failed
+
+# ③ 第三方广告联盟
+DOMAIN-SUFFIX,caixin.adsame.com,REJECT,dns-failed
+DOMAIN-SUFFIX,caixinimg.adsame.com,REJECT,dns-failed
+
+# ④ 广告数据接口（路径级精确拦截）
+URL-REGEX,^https?:\/\/gateway\.caixin\.com\/api\/app-api\/adInfoData\/,REJECT,extended-matching
+URL-REGEX,^https?:\/\/gateway\.caixin\.com\/api\/app-api\/poster\/,REJECT,extended-matching
+
+# ⑤ 「AI 猜你想问」数据接口（正文页 AI 卡片的问题来源）
+#    格式：https://www.caixin.com/ai/question/<文章ID后4位>/<文章ID>.js
+#    拦截后卡片无内容可取，配合脚本隐藏容器即可完全移除
+URL-REGEX,^https?:\/\/www\.caixin\.com\/ai\/question\/\d+\/\d+\.js,REJECT,extended-matching
+
+# ⑥ 统计埋点（不影响正文）
+DOMAIN-SUFFIX,logstat.caixin.com,REJECT,dns-failed
+DOMAIN-SUFFIX,ulogs.umeng.com,REJECT,dns-failed
+DOMAIN-SUFFIX,ulogs.umengcloud.com,REJECT,dns-failed
+
+# ⑦ 可选项：Apollo 配置中心
+# DOMAIN-SUFFIX,apollo.caixin.com,REJECT,dns-failed
+
+# ⑧ 保护名单：若你有 DOMAIN-SUFFIX,caixin.com 整域拦截，把这几行放你规则顶部
+# DOMAIN-SUFFIX,gateway.caixin.com,DIRECT
+# DOMAIN-SUFFIX,api.caixin.com,DIRECT
+# DOMAIN-SUFFIX,www.caixin.com,DIRECT
+# DOMAIN-SUFFIX,m.caixin.com,DIRECT
+# DOMAIN-SUFFIX,img.caixin.com,DIRECT
+# DOMAIN-SUFFIX,file.caixin.com,DIRECT
+
+[MITM]
+# 关键：Surge 的 hostname 里裸 * 不等于全部域名，未列出的只做隧道不解密
+hostname = %APPEND% *.caixin.com, *.caixin.cn, *.caixinmedia.com, *.adsame.com, *.fastecn.com
+
+[Script]
+# 正文 H5 广告隐藏：向文章 HTML 注入 CSS（class 已从 index.js 源码确认）
+# script-path 为本地文件名，需把 caixin-body-ad.js 放到 Surge 的脚本目录
+caixin_body_ad_hide = type=http-response, pattern=^https?:\/\/mappsv5\.caixin\.com\/articlev5\/.+\.html, requires-body=1, max-size=0, binary-body-mode=0, script-path=caixin-body-ad.js
