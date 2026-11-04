@@ -1,0 +1,7 @@
+# Local MCP deployment, dependencies and private test artifacts
+.local/
+node_modules/
+.env
+.env.*
+test-result.json
+npm-audit.json
