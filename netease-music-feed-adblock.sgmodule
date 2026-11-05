@@ -1,5 +1,5 @@
 #!name=网易云音乐 · 首页净化（增强）
-#!desc=配合「网易云音乐 · 去开屏广告」使用：再清掉首页/我的页的付费投放卡、启动弹窗、首页 Banner 广告位与直播入口。需开启 MITM，且与开屏模块同时启用。
+#!desc=配合「网易云音乐 · 去开屏广告」使用：清掉首页/播客页/听书页的付费投放卡、启动弹窗、首页 Banner 广告位、直播入口、VIP 推广卡与小程序推广位。需开启 MITM，且与开屏模块同时启用。
 #!author=Minis
 #!icon=https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/Netease.png
 #!date=2026-11-06
@@ -16,9 +16,15 @@
 ^https?://interface\d?\.music\.163\.com/(x)?e?api/link/scene/show/resource([?/]|$) - reject
 # 直播入口 / 直播推荐位
 ^https?://interface\d?\.music\.163\.com/(x)?e?api/mlivestream/entrance([?/]|$) - reject
+# 听书/播客页「权益弹窗」（VIP 引导）
+^https?://interface\d?\.music\.163\.com/(x)?e?api/voice/book/page/rights/pop([?/]|$) - reject
+# 播客页 VIP 分发推广卡
+^https?://interface\d?\.music\.163\.com/(x)?e?api/podcast/new/user/voicebook/vip/distribute([?/]|$) - reject
+# 小程序推广位（首页/听书页的市场入口卡片）
+^https?://interface\d?\.music\.163\.com/(x)?e?api/homepage/miniprogram/market/list([?/]|$) - reject
 
 [MITM]
 hostname = %APPEND% interface.music.163.com, interface1.music.163.com, interface3.music.163.com, interface9.music.163.com, ipv4.music.163.com, music.163.com
 
-# 与「网易云音乐 · 去开屏广告」配套安装；若首页出现空白/加载失败，先停用本模块定位是哪一条
+# 与「网易云音乐 · 去开屏广告」配套安装；若某页出现空白/加载失败，先停用本模块定位是哪一条
 # 直链：https://raw.githubusercontent.com/YUANCHUANYING/surge/main/netease-music-feed-adblock.sgmodule
