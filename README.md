@@ -20,7 +20,7 @@ https://raw.githubusercontent.com/YUANCHUANYING/surge/main/netease-music-feed-ad
 
 启用模块并确认 MITM 已开启即可，脚本自动远程加载。首次使用建议卸载重装财新 App 清除广告缓存。
 
-网易云模块走「广告素材域名 REJECT + `/x?e?api/ad` 全系 URL 重写 reject」，不需要脚本，但**必须开启 MITM**（路径层拦截依赖解密）。实测：`/eapi/ad/get`、`/eapi/sp/flow/popup` 返回 503，普通接口如 `/eapi/song/enhance/player/url` 仍 200。
+网易云模块走「广告素材域名 REJECT + `/x?e?api/ad` 全系 `URL-REGEX` 规则 REJECT」，不需要脚本，但**必须开启 MITM**（路径层匹配依赖解密）。实测：`/eapi/ad/get`、`/xeapi/ad/config/get`、`/eapi/sp/flow/popup` 返回 503，普通接口如 `/eapi/song/enhance/player/url` 仍 200。URL-REGEX 是前缀匹配，`/eapi/adx/*` 广告交易接口也会被一并拦掉，属预期行为。
 
 已下发的开屏素材会被 App 本地缓存并重放，模块只能挡住后续拉取；要立刻验证效果需清一次 App 缓存或重装。切勿整域 REJECT `ipv4.music.163.com`。
 
