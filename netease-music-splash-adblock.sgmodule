@@ -1,5 +1,5 @@
 #!name=网易云音乐 · 去开屏广告
-#!desc=拦截网易云音乐 iOS 客户端开屏广告：广告素材域名直接 REJECT，广告下发接口 /x?e?api/ad 全部 reject 掉，客户端拿不到广告即跳过开屏。不影响歌单/播放/登录。需开启 MITM。
+#!desc=拦截网易云音乐 iOS 客户端开屏广告：广告素材域名 REJECT + 广告下发接口 (/x?e?api/ad 全系) 用 URL-REGEX 直接拒绝。需开启 MITM（否则只剩域名层拦截）。不影响歌单/播放/登录。
 #!author=Minis
 #!icon=https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/Netease.png
 #!date=2026-11-06
@@ -15,19 +15,17 @@ DOMAIN,iadmatapk.nosdn.127.net,REJECT
 DOMAIN,iad.g.163.com,REJECT
 DOMAIN,iad.service.163.org,REJECT
 DOMAIN,bdlog.tanx.com,REJECT
-
-[URL Rewrite]
-# 开屏广告下发、配置、预取、loading 位、曝光上报
-^https?://interface\d?\.music\.163\.com/(x)?e?api/ad([/?]|$) - reject
-^https?://ipv4\.music\.163\.com/(x)?e?api/ad([/?]|$) - reject
-^https?://music\.163\.com/(x)?e?api/ad([/?]|$) - reject
+# 开屏广告下发 / 配置 / 预取 / loading 位 / 曝光上报
+URL-REGEX,^https?://interface[0-9]*\.music\.163\.com/(x)?e?api/ad,REJECT
+URL-REGEX,^https?://ipv4\.music\.163\.com/(x)?e?api/ad,REJECT
+URL-REGEX,^https?://music\.163\.com/(x)?e?api/ad,REJECT
 # 启动时「免流量领 VIP」弹窗
-^https?://interface\d?\.music\.163\.com/(x)?e?api/sp/flow/popup - reject
+URL-REGEX,^https?://interface[0-9]*\.music\.163\.com/(x)?e?api/sp/flow/popup,REJECT
 
 [MITM]
 hostname = %APPEND% interface.music.163.com, interface1.music.163.com, interface3.music.163.com, interface9.music.163.com, ipv4.music.163.com, music.163.com
 
-# 安装：Surge → 首页 → 修改 → 模块 → 安装新模块 → 粘贴下面直链
+# 安装：Surge → 首页 → 修改 → 模块 → 安装新模块 → 粘贴直链
 # https://raw.githubusercontent.com/YUANCHUANYING/surge/main/netease-music-splash-adblock.sgmodule
 # 生效后如仍闪一次旧开屏：属 App 本地素材缓存，清一次缓存或强杀重开即可
 # 切勿整域 REJECT ipv4.music.163.com / interface*.music.163.com，会导致播放、登录全挂
