@@ -7,14 +7,18 @@
 | 模块 | 说明 |
 |---|---|
 | `caixin-adblock.sgmodule` | 财新 App 去广告 |
+| `netease-music-splash-adblock.sgmodule` | 网易云音乐去开屏广告 |
 
 **安装地址**
 
 ```
 https://raw.githubusercontent.com/YUANCHUANYING/surge/main/caixin-adblock.sgmodule
+https://raw.githubusercontent.com/YUANCHUANYING/surge/main/netease-music-splash-adblock.sgmodule
 ```
 
 启用模块并确认 MITM 已开启即可，脚本自动远程加载。首次使用建议卸载重装财新 App 清除广告缓存。
+
+网易云模块走「素材域名 REJECT + `/x?e?api/ad` 全系 REJECT-DICT」，不需要脚本；生效后如仍闪一次旧开屏，属本地素材缓存，清缓存或强杀重开即可。切勿整域 REJECT `ipv4.music.163.com`。
 
 ## Skill / MCP
 
