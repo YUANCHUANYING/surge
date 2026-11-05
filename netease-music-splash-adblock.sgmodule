@@ -1,33 +1,33 @@
 #!name=网易云音乐 · 去开屏广告
-#!desc=拦截网易云音乐 iOS 客户端开屏广告：广告素材域名直接 REJECT，广告下发接口返回空字典（REJECT-DICT）让客户端解密失败后跳过开屏。不影响歌单/播放/登录。需开启 MITM。
+#!desc=拦截网易云音乐 iOS 客户端开屏广告：广告素材域名直接 REJECT，广告下发接口 /x?e?api/ad 全部 reject 掉，客户端拿不到广告即跳过开屏。不影响歌单/播放/登录。需开启 MITM。
 #!author=Minis
 #!icon=https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/Netease.png
 #!date=2026-11-06
 #!system=ios
 
 [Rule]
-# —— 开屏 / 信息流广告素材（图片、短视频、APK）——
+# 开屏 / 信息流广告素材（图片、短视频、APK）
 DOMAIN,iadmusicmat.music.126.net,REJECT
 DOMAIN,iadmusicmatvideo.music.126.net,REJECT
 DOMAIN,iadmat.nosdn.127.net,REJECT
 DOMAIN,iadmatapk.nosdn.127.net,REJECT
-# —— 网易广告网关 / 广告位接口 / 曝光监测 ——
+# 网易广告网关 / 广告位接口 / 曝光监测
 DOMAIN,iad.g.163.com,REJECT
 DOMAIN,iad.service.163.org,REJECT
 DOMAIN,bdlog.tanx.com,REJECT
 
 [URL Rewrite]
-# 开屏广告下发、配置、预取、loading 位、曝光上报：统一返回 {}（REJECT-DICT）
-# 覆盖 /api/ad、/eapi/ad、/xeapi/ad 全系，客户端解不出广告对象即跳过开屏
-^https?:\/\/(?:(?:ipv4|interface\d?)\.music\.163\.com|music\.163\.com)\/(?:x)?e?api\/ad(?:\/|$) - reject-dict
+# 开屏广告下发、配置、预取、loading 位、曝光上报
+^https?://interface\d?\.music\.163\.com/(x)?e?api/ad - reject
+^https?://ipv4\.music\.163\.com/(x)?e?api/ad - reject
+^https?://music\.163\.com/(x)?e?api/ad - reject
 # 启动时「免流量领 VIP」弹窗
-^https?:\/\/(?:ipv4|interface\d?)\.music\.163\.com\/(?:x)?e?api\/sp\/flow\/popup - reject-dict
+^https?://interface\d?\.music\.163\.com/(x)?e?api/sp/flow/popup - reject
 
 [MITM]
 hostname = %APPEND% interface.music.163.com, interface1.music.163.com, interface3.music.163.com, interface9.music.163.com, ipv4.music.163.com, music.163.com
 
-# ─────────────────────────────────────────────────────────────
-# 安装：Surge → 首页 → 模块 → 安装新模块 → 选择本文件
-# 生效后如果还能看到旧开屏：设置里清一次 App 缓存，或强杀 App 重开（素材有本地缓存时会重放一次）
-# 注意：不要整域 REJECT ipv4.music.163.com / interface*.music.163.com，会导致播放、登录全挂
-# ─────────────────────────────────────────────────────────────
+# 安装：Surge → 首页 → 修改 → 模块 → 安装新模块 → 粘贴下面直链
+# https://raw.githubusercontent.com/YUANCHUANYING/surge/main/netease-music-splash-adblock.sgmodule
+# 生效后如仍闪一次旧开屏：属 App 本地素材缓存，清一次缓存或强杀重开即可
+# 切勿整域 REJECT ipv4.music.163.com / interface*.music.163.com，会导致播放、登录全挂
