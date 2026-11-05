@@ -24,7 +24,20 @@ https://raw.githubusercontent.com/YUANCHUANYING/surge/main/netease-music-feed-ad
 
 已下发的开屏素材会被 App 本地缓存并重放，模块只能挡住后续拉取；要立刻验证效果需清一次 App 缓存或重装。切勿整域 REJECT `ipv4.music.163.com`。
 
-首页净化模块（可选）额外拦掉 `/eapi/delivery/{deliver,batch-deliver}`（会员/付费投放卡）、`/eapi/resniche/tspopup/show`（启动弹窗）、`/eapi/link/position/show/resource` 与 `/eapi/link/scene/show/resource`（首页 Banner / 场景投放位）、`/eapi/mlivestream/entrance`（直播入口）。实测这 5 条均返 503，`/eapi/song/enhance/player/url` 等正常接口仍 200，首页三大卡片与推荐流加载正常。若首页某块出现空白，先停用该模块定位具体条目。
+首页净化模块（可选）额外拦掉以下接口（全部 `- reject`）：
+
+| 接口 | 对应位置 |
+|---|---|
+| `/eapi/delivery/{deliver,batch-deliver}` | 会员 / 付费投放卡 |
+| `/eapi/resniche/tspopup/show` | 启动、活动弹窗 |
+| `/eapi/link/position/show/resource` | 首页 Banner 广告位 |
+| `/eapi/link/scene/show/resource` | 场景化投放位 |
+| `/eapi/mlivestream/entrance` | 直播入口 / 直播推荐位 |
+| `/xeapi/voice/book/page/rights/pop` | 听书/播客「权益弹窗」 |
+| `/xeapi/podcast/new/user/voicebook/vip/distribute` | 播客页 VIP 分发推广卡 |
+| `/xeapi/homepage/miniprogram/market/list` | 小程序推广位（首页/听书页） |
+
+实测 8 条全部返 503；`/eapi/song/enhance/player/url`、`/xeapi/voicebook/rcmd/tab/infinite/blocks/get`（听书推荐流本体）仍 200，首页三大卡片、播客「为你推荐」、听书榜单与新人都爱听均正常渲染。听书页顶部那条「2.5元升级 SVIP」是页面自带的静态 banner，不来自接口，拦不掉。若某页出现空白，先停用本模块定位具体条目。
 
 > 注：Surge 会**静默丢弃** URL Rewrite 里的 `- reject-dict`（Loon 写法），只保留域名规则且不报错；模块内统一用 `- reject`。自检办法：`curl -H "X-Key: …" http://127.0.0.1:6171/v1/profiles/current` 拉合并配置 grep 自己的 pattern。
 
