@@ -18,9 +18,9 @@ DOMAIN,bdlog.tanx.com,REJECT
 
 [URL Rewrite]
 # 开屏广告下发、配置、预取、loading 位、曝光上报
-^https?://interface\d?\.music\.163\.com/(x)?e?api/ad - reject
-^https?://ipv4\.music\.163\.com/(x)?e?api/ad - reject
-^https?://music\.163\.com/(x)?e?api/ad - reject
+^https?://interface\d?\.music\.163\.com/(x)?e?api/ad([/?]|$) - reject
+^https?://ipv4\.music\.163\.com/(x)?e?api/ad([/?]|$) - reject
+^https?://music\.163\.com/(x)?e?api/ad([/?]|$) - reject
 # 启动时「免流量领 VIP」弹窗
 ^https?://interface\d?\.music\.163\.com/(x)?e?api/sp/flow/popup - reject
 
