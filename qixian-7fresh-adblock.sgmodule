@@ -1,0 +1,23 @@
+#!name=七鲜 · 去广告（Minis）
+#!desc=拦截七鲜 App 开屏广告、营销弹窗、推广气泡与广告预下载；需开启 MITM
+#!author=Minis
+#!date=2026-11-06
+#!system=ios
+
+[URL Rewrite]
+# 开屏广告
+^https?://color\.7fresh\.com/api\?functionId=start_screen_7fresh_query - reject
+# 活动弹窗
+^https?://color\.7fresh\.com/api\?functionId=activity_detail_executePopup - reject
+# 新人券气泡
+^https?://color\.7fresh\.com/api\?functionId=7fresh_user_new_coupon_bubble - reject
+# 门店品牌推广位
+^https?://color\.7fresh\.com/api\?functionId=omnitech_address_get_brand_promotion - reject
+# 首页提醒 / 营销策略
+^https?://color\.7fresh\.com/api\?functionId=7fresh_first_page_reminderhomepage - reject
+^https?://color\.7fresh\.com/api\?functionId=precision_marketing_strategy_pull - reject
+# 京东广告素材预下载
+^https?://api\.m\.jd\.com/client\.action\?functionId=jdaPreDownload - reject
+
+[MITM]
+hostname = %APPEND% color.7fresh.com, api.m.jd.com
